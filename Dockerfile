@@ -1,9 +1,17 @@
-FROM ubuntu:16.04
-LABEL maintainer="flunk13@gmail.com"
+FROM alpine:latest
+LABEL maintainer="andrei.ozerov92@gmail.com"
 LABEL version="1.0.0"
-RUN apt update && \
-    apt -y install python-pip
-RUN pip install -UI pip
-RUN pip install -UI pbr setuptools
-RUN pip install -UI jenkins-job-builder
-CMD [ "sh", "-c", "jenkins-jobs --ignore-cache --conf ${JENKINS_INI} -l debug update -r ${JOBS_DIR}" ]
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
+    python3 && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install -UI \
+    pip \
+    pbr \
+    setuptools \
+    jenkins-job-builder && \
+    rm -r /root/.cache
+
+CMD [ "sh", "-c", "jenkins-jobs --ignore-cache --conf ${JENKINS_INI} -l debug update --workers ${WORKERS} -r ${JOBS_DIR}" ]
