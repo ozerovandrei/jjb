@@ -1,6 +1,6 @@
 FROM alpine:latest
 LABEL maintainer="andrei.ozerov92@gmail.com"
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 
 RUN apk update && apk upgrade && \
     apk add --no-cache \
@@ -11,7 +11,7 @@ RUN apk update && apk upgrade && \
     pip \
     pbr \
     setuptools \
-    jenkins-job-builder && \
+    jenkins-job-builder==2.0.0.0b2 && \
     rm -r /root/.cache
 
 CMD [ "sh", "-c", "jenkins-jobs --ignore-cache --conf ${JENKINS_INI} -l debug update --workers ${WORKERS} -r ${JOBS_DIR}" ]
