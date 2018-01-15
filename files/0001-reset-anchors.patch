@@ -1,0 +1,11 @@
+--- local_yaml.py
++++ local_yaml_new.py
+@@ -192,7 +192,7 @@
+
+     @classmethod
+     def reset_anchors(cls):
+-        cls.anchors = {}
++        pass
+
+     # override the default composer to skip resetting the anchors at the
+     # end of the current document
