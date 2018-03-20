@@ -1,6 +1,6 @@
 FROM alpine:latest
 LABEL maintainer="andrei.ozerov92@gmail.com"
-LABEL version="1.0.3"
+LABEL version="1.0.4"
 
 RUN apk update && apk upgrade && \
     apk add --no-cache \
@@ -12,7 +12,7 @@ RUN apk update && apk upgrade && \
     pip \
     pbr \
     setuptools \
-    jenkins-job-builder==2.0.0.0b2 && \
+    jenkins-job-builder==2.0.3 && \
     rm -r /root/.cache
 
 COPY files/0001-reset-anchors.patch /usr/lib/python3.6/site-packages/jenkins_jobs/0001-reset-anchors.patch
